@@ -1,6 +1,4 @@
-Here’s a **clean, professional, and polished README.md** tailored for your project. You can copy-paste this directly into your GitHub repo:
 
----
 
 # 🖼️ Image Clustering and Image Comparison
 
