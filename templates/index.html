@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="AI-powered image clustering using deep learning. Upload images and let MobileNetV2 + clustering algorithms group them by visual similarity.">
+  <title>Image Clustering — AI-Powered Visual Grouping</title>
+  <link rel="stylesheet" href="/static/style.css">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🧩</text></svg>">
+</head>
+<body>
+
+  <!-- Animated Background Orbs -->
+  <div class="bg-animation">
+    <div class="orb"></div>
+    <div class="orb"></div>
+    <div class="orb"></div>
+  </div>
+
+  <div class="container">
+
+    <!-- ── Hero ──────────────────────────────────────────────────────── -->
+    <header class="hero">
+      <div class="hero-icon">🧩</div>
+      <h1>Image Clustering</h1>
+      <p>Upload your images and watch AI group them by visual similarity using deep learning feature extraction and unsupervised clustering.</p>
+    </header>
+
+    <!-- ── Upload Section ────────────────────────────────────────────── -->
+    <section class="upload-section glass-card" id="upload-section">
+      <div class="upload-zone" id="upload-zone">
+        <span class="icon">📁</span>
+        <h3>Drop your images here</h3>
+        <p>or click to browse — supports PNG, JPG, GIF, BMP, WebP</p>
+        <button class="browse-btn" id="browse-btn" type="button">Browse Files</button>
+      </div>
+      <input type="file" id="file-input" multiple accept="image/*">
+
+      <!-- Preview -->
+      <div class="preview-section" id="preview-section">
+        <div class="preview-header">
+          <h3>📸 Selected Images</h3>
+          <span class="preview-count" id="preview-count">0 images</span>
+        </div>
+        <div class="preview-grid" id="preview-grid"></div>
+      </div>
+    </section>
+
+    <!-- ── Controls ──────────────────────────────────────────────────── -->
+    <section class="controls-section glass-card" id="controls-section">
+      <div class="controls-grid">
+        <div class="form-group">
+          <label for="algorithm-select">Clustering Algorithm</label>
+          <select id="algorithm-select">
+            <option value="kmeans">K-Means</option>
+            <option value="dbscan">DBSCAN (auto-detect clusters)</option>
+            <option value="agglomerative">Agglomerative</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="cluster-slider">
+            Number of Clusters
+            <span class="range-value" id="cluster-value">3</span>
+          </label>
+          <div class="range-wrapper">
+            <input type="range" id="cluster-slider" min="2" max="10" value="3">
+          </div>
+        </div>
+        <div class="form-group">
+          <label>&nbsp;</label>
+          <button class="btn-cluster" id="cluster-btn">
+            🚀 Cluster Images
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- ── Results ───────────────────────────────────────────────────── -->
+    <section class="results-section" id="results-section">
+      <div class="results-header">
+        <h2>✨ Clustering Results</h2>
+      </div>
+
+      <!-- Stats -->
+      <div class="stats-grid">
+        <div class="stat-card glass-card">
+          <div class="stat-icon">📸</div>
+          <div class="stat-value" id="stat-total">0</div>
+          <div class="stat-label">Total Images</div>
+        </div>
+        <div class="stat-card glass-card">
+          <div class="stat-icon">🗂️</div>
+          <div class="stat-value" id="stat-clusters">0</div>
+          <div class="stat-label">Clusters Found</div>
+        </div>
+        <div class="stat-card glass-card">
+          <div class="stat-icon">⚙️</div>
+          <div class="stat-value" id="stat-algo">—</div>
+          <div class="stat-label">Algorithm</div>
+        </div>
+        <div class="stat-card glass-card">
+          <div class="stat-icon">📊</div>
+          <div class="stat-value" id="stat-silhouette">—</div>
+          <div class="stat-label">Silhouette Score</div>
+          <div class="silhouette-meter">
+            <div class="fill" id="silhouette-fill" style="width:0%"></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Scatter Plot -->
+      <div class="scatter-section glass-card">
+        <h3>🗺️ 2D Feature Space (PCA)</h3>
+        <div class="scatter-container">
+          <canvas id="scatter-canvas"></canvas>
+          <div class="scatter-tooltip" id="scatter-tooltip"></div>
+        </div>
+      </div>
+
+      <!-- Cluster Groups -->
+      <div class="clusters-grid" id="clusters-container"></div>
+    </section>
+
+    <!-- ── Footer ────────────────────────────────────────────────────── -->
+    <footer class="footer">
+      <p>Powered by <strong>MobileNetV2</strong> + <strong>scikit-learn</strong> · Built with ❤️</p>
+    </footer>
+  </div>
+
+  <!-- ── Image Modal ─────────────────────────────────────────────────── -->
+  <div class="image-modal" id="image-modal">
+    <img id="modal-image" src="" alt="Full-size image">
+  </div>
+
+  <!-- ── Loading Overlay ─────────────────────────────────────────────── -->
+  <div class="loading-overlay" id="loading-overlay">
+    <div class="spinner"></div>
+    <p>Processing your images…</p>
+    <div class="loading-step" id="loading-step">Uploading images…</div>
+  </div>
+
+  <script src="/static/app.js"></script>
+</body>
+</html>
