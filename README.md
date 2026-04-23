@@ -162,8 +162,4 @@ This project is licensed under the **MIT License**.
 
 ---
 
-If you want, I can make this even better by:
 
-* Adding **badges (GitHub, Python, License)**
-* Writing a **short 2–4 line description for viva/project report**
-* Or **customizing exactly based on your code files**
